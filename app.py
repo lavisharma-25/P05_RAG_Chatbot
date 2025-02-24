@@ -7,7 +7,7 @@ from utils.llm import gemini_model
 load_dotenv()  # Load environment variables from .env file
 
 def main():
-    st.title("PDF QA App")
+    st.title("Document Based QA App")
 
     # Ensure the Data directory exists
     os.makedirs("Data", exist_ok=True)
@@ -23,7 +23,7 @@ def main():
     if uploaded_pdf is not None:
         # Check if a new PDF is uploaded
         if st.session_state.current_pdf != uploaded_pdf.name:
-            st.info("New PDF detected. Clearing previous embeddings...")
+            # st.info("New PDF detected. Clearing previous embeddings...")
 
             # Clear previous embeddings and reset session
             if st.session_state.vector_db is not None:
@@ -33,29 +33,29 @@ def main():
             # Clear Streamlit cache to avoid stale data
             st.cache_data.clear()
             st.cache_resource.clear()
-            st.info("Previous embeddings and cache cleared.")
+            # st.info("Previous embeddings and cache cleared.")
 
             # Save the uploaded PDF to Data directory
             pdf_path = os.path.join("Data", uploaded_pdf.name)
             with open(pdf_path, "wb") as f:
                 f.write(uploaded_pdf.getbuffer())
-            st.success(f"PDF uploaded successfully to: {pdf_path}")
+            # st.success(f"PDF uploaded successfully to: {pdf_path}")
 
             # Create new embeddings and store in the database
             with st.spinner("Creating embeddings, please wait..."):
                 st.session_state.vector_db = create_and_store_embeddings(pdf_path)
                 st.session_state.current_pdf = uploaded_pdf.name
 
-                if st.session_state.vector_db:
-                    st.success("Embeddings created successfully!")
-                else:
-                    st.error("Failed to create embeddings. Please check the PDF content or embedding function.")
+                # if st.session_state.vector_db:
+                #     st.success("Embeddings created successfully!")
+                # else:
+                #     st.error("Failed to create embeddings. Please check the PDF content or embedding function.")
 
     # Text input for user query
     user_query = st.text_input("Enter your query:")
 
     # Button to get the answer
-    if st.button("Get Answer"):
+    if st.button("Retrieve"):
         if st.session_state.vector_db is None:
             st.warning("Please upload a PDF and create embeddings first.")
         else:
