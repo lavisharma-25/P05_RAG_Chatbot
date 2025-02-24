@@ -5,8 +5,6 @@ langchain-community
 langchain-core
 langchain-huggingface
 langchain-postgres
-langchain-text-splitter
-langsmith
 pgvector
 psycopg-binary
 psycopg2-binary
