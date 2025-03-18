@@ -1,4 +1,4 @@
-# Document Based QnA Application
+# RAG Chatbot
 
 ## Overview
 This project is an AI-powered application that extracts text from PDFs, stores embeddings in PostgreSQL using the `pgvector` extension, and provides a Streamlit-based user interface for interaction and question answering.
